@@ -19,6 +19,11 @@ const TodoList = () => {
   const inputHandler = (e) => {
     setText(e.target.value);
   };
+  const keyDownHandler = (e) => {
+    if (e.key === 'Enter') {
+      todosRefreshHandler();
+    }
+  };
 
   // --- X button
   const xButtonHandler = (idToRemove) => {
@@ -42,6 +47,7 @@ const TodoList = () => {
       <input
         value={text}
         onChange={inputHandler}
+        onKeyDown={keyDownHandler}
         placeholder="Escribe una tarea"
         type="text"
         className="border px-1"

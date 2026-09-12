@@ -3,23 +3,33 @@ import List from '../../common/List';
 import { useState } from 'react';
 
 const CheckTodoList = () => {
-  const [todoList, setTodoList] = useState([]);
+  const loadList = () => {
+    const str = localStorage.getItem('todoList');
+    if (str) {
+      return JSON.parse(str);
+    }
+    return [];
+  };
+
+  const saveList = (tdList) => {
+    const str = JSON.stringify(tdList);
+    localStorage.setItem('todoList', str);
+  };
+
+  const [todoList, setTodoList] = useState(loadList);
   const [inputText, setInputText] = useState('');
 
   const addBtnHandler = () => {
     if (inputText.length) {
-      const checkHandler = (e) => {
-        newTodo.checked = e.target.checked;
-        console.log(UlistItems);
-      };
-
       const newTodo = {
         checked: false,
         text: inputText,
-        handler: checkHandler,
+        id: crypto.randomUUID(),
       };
-      setTodoList([...todoList, newTodo]);
+      const auxList = [...todoList, newTodo];
+      setTodoList(auxList);
       setInputText('');
+      saveList(auxList);
     }
   };
 
@@ -27,14 +37,39 @@ const CheckTodoList = () => {
     setInputText(e.target.value);
   };
 
+  const keyDownHandler = (e) => {
+    if (e.key === 'Enter') {
+      addBtnHandler();
+    }
+  };
+
   const cleanBtnHandler = () => {
-    setTodoList(todoList.filter((todo) => !todo.checked));
+    const auxList = todoList.filter((todo) => !todo.checked);
+    setTodoList(auxList);
+    saveList(auxList);
+  };
+
+  const checkHandler = (id) => {
+    setTodoList(
+      todoList.map((elem) => {
+        if (elem.id === id) {
+          return { ...elem, checked: !elem.checked };
+        } else {
+          return elem;
+        }
+      }),
+    );
   };
 
   const UlistItems = todoList.map((elem) => {
     return (
       <>
-        <input onChange={elem.handler} className="mr-1" type="checkbox" />
+        <input
+          onChange={() => checkHandler(elem.id)}
+          className="mr-1"
+          type="checkbox"
+          checked={elem.checked}
+        />
         {elem.text}
       </>
     );
@@ -44,6 +79,7 @@ const CheckTodoList = () => {
     <>
       <input
         onChange={inputChangeHandler}
+        onKeyDown={keyDownHandler}
         type="text"
         className="border mr-5"
         value={inputText}

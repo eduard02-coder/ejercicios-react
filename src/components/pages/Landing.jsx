@@ -3,8 +3,9 @@ import Link from '../common/Link';
 const Landing = () => {
   return (
     <section className="landing ">
+      <title>Ejercicios - React</title>
       <header>
-        <h1>Trabajo Practico 1 - React</h1>
+        <h1>Ejercicios - React</h1>
         <h3>
           Alumno: <span>Eduardo O.</span>
         </h3>
