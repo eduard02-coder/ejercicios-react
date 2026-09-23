@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
 import App from './App.jsx';
@@ -14,7 +14,7 @@ import Ejercicio7 from './components/pages/Ejercicio7/Ejercicio7';
 import Ejercicio8 from './components/pages/Ejercicio8/Ejercicio8';
 import Ejercicio9 from './components/pages/Ejercicio9/Ejercicio9';
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   { path: '/', element: <App /> },
   { path: '/ejercicio1', element: <Ejercicio1 /> },
   { path: '/ejercicio2', element: <Ejercicio2 /> },
