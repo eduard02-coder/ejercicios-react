@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
 import App from './App.jsx';
@@ -14,21 +14,19 @@ import Ejercicio7 from './components/pages/Ejercicio7/Ejercicio7';
 import Ejercicio8 from './components/pages/Ejercicio8/Ejercicio8';
 import Ejercicio9 from './components/pages/Ejercicio9/Ejercicio9';
 
-const router = createBrowserRouter(
-  [
-    { path: '/', element: <App /> },
-    { path: '/ejercicio1', element: <Ejercicio1 /> },
-    { path: '/ejercicio2', element: <Ejercicio2 /> },
-    { path: '/ejercicio3', element: <Ejercicio3 /> },
-    { path: '/ejercicio4', element: <Ejercicio4 /> },
-    { path: '/ejercicio5', element: <Ejercicio5 /> },
-    { path: '/ejercicio6', element: <Ejercicio6 /> },
-    { path: '/ejercicio7', element: <Ejercicio7 /> },
-    { path: '/ejercicio8', element: <Ejercicio8 /> },
-    { path: '/ejercicio9', element: <Ejercicio9 /> },
-  ],
-  { basename: import.meta.env.BASE_URL },
-);
+const router = createHashRouter([
+  { path: '/', element: <App /> },
+  { path: '/ejercicio1', element: <Ejercicio1 /> },
+  { path: '/ejercicio2', element: <Ejercicio2 /> },
+  { path: '/ejercicio3', element: <Ejercicio3 /> },
+  { path: '/ejercicio4', element: <Ejercicio4 /> },
+  { path: '/ejercicio5', element: <Ejercicio5 /> },
+  { path: '/ejercicio6', element: <Ejercicio6 /> },
+  { path: '/ejercicio7', element: <Ejercicio7 /> },
+  { path: '/ejercicio8', element: <Ejercicio8 /> },
+  { path: '/ejercicio9', element: <Ejercicio9 /> },
+  { path: '*', element: <h1>Página no encontrada</h1> },
+]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
